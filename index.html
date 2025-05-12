@@ -16,7 +16,7 @@
   <meta property="og:description" content="Spin the wheel and decide your lunch!" />
   <meta property="og:image"       content="og_image.png" />
   <meta property="og:url"         content="https://zamio5271.github.io/lunchmenu/" />
-  <meta name="twitter:card"       content="summa ry_large_image" />
+  <meta name="twitter:card"       content="summary_large_image" />
   <meta name="twitter:title"      content="Lunch Menu Roulette" />
   <meta name="twitter:image"      content="og_image.png" />
 
@@ -78,7 +78,7 @@
     /****************  RENDER  ****************/
     function resizeCanvas(){const size=document.getElementById('wheel-container').clientWidth;canvas.width=size;canvas.height=size;drawWheel();}
 
-    function drawWheel(){ctx.clearRect(0,0,canvas.width,canvas.height);if(!menus.length)return;const sliceAngle=2*Math.PI/menus.length;const cx=canvas.width/2,cy=canvas.height/2,r=canvas.width/2-10;for(let i=0;i<menus.length;i++){const start=rotation+i*sliceAngle,end=start+sliceAngle;ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,start,end);ctx.fillStyle=baseColors[i%baseColors.length]||randColor();ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();const mid=start+sliceAngle/2;const tx=cx+Math.cos(mid)*r*0.58,ty=cy+Math.sin(mid)*r*0.58;ctx.save();ctx.translate(tx,ty);ctx.rotate(mid+Math.PI/2);ctx.font=`${Math.max(18,r*0.09)}px serif`;ctx.textAlign='center';ctx.fillStyle='#fff';ctx.fillText(emojiMap[menus[i]]||'🍽️',0,0);ctx.restore();}ctx.beginPath();ctx.arc(cx,cy,4,0,2*Math.PI);ctx.fillStyle='#000';ctx.fill();}
+    function drawWheel(){ctx.clearRect(0,0,canvas.width,canvas.height);if(!menus.length)return;const sliceAngle=2*Math.PI/menus.length;const cx=canvas.width/2,cy=canvas.height/2,r=canvas.width/2-10;for(let i=0;i<menus.length;i++){const start=rotation+i*sliceAngle,end=start+sliceAngle;ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,start,end);ctx.fillStyle=baseColors[i%baseColors.length]||randColor();ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();const mid=start+sliceAngle/2;const tx=cx+Math.cos(mid)*r*0.58,ty=cy+Math.sin(mid)*r*0.58;ctx.save();ctx.translate(tx,ty);ctx.rotate(mid+Math.PI/2);ctx.font=`${Math.max(18,r*0.09)}px serif`;ctx.textAlign='center';ctx.fillStyle='#fff';ctx.fillText(menus[i],0,0);ctx.restore();}ctx.beginPath();ctx.arc(cx,cy,4,0,2*Math.PI);ctx.fillStyle='#000';ctx.fill();}
 
     function burst(){confetti({particleCount:120,spread:70,origin:{y:0.3}});}
 
