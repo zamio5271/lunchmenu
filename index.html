@@ -15,7 +15,7 @@
   <meta property="og:title"       content="Lunch Menu Roulette" />
   <meta property="og:description" content="Spin the wheel and decide your lunch!" />
   <meta property="og:image"       content="og_image.png" />
-  <meta property="og:url"         content="https://zamio5271.github.io/lunchmenu/" />
+  <meta property="og:url"         content="https://your-domain.example/lunch" />
   <meta name="twitter:card"       content="summary_large_image" />
   <meta name="twitter:title"      content="Lunch Menu Roulette" />
   <meta name="twitter:image"      content="og_image.png" />
@@ -60,7 +60,7 @@
   <script>
     /****************  DATA  ****************/
     const emojiMap={ '치킨':'🍗','김치찌개':'🍲','김치':'🥬','햄버거':'🍔','라면':'🍜','김밥':'🍙','샐러드':'🥗','피자':'🍕','초밥':'🍣','떡볶이':'🌶️'};
-    const defaultMenus=['갑오징어','김치찌개','추어탕','순대국','비빔국수','오리고기','된장찌게','샤브샤브','만두국','삼겹살'];
+    const defaultMenus=['치킨','김치찌개','김치','햄버거','라면','김밥','샐러드','피자','초밥','떡볶이'];
     let menus=JSON.parse(localStorage.getItem('menus'))||[...defaultMenus];
     const baseColors=['#5d3fa9','#c2185b','#e64a19','#d32f2f','#ff7043','#ffa726','#ffd54f','#8bc34a','#26a69a','#3949ab'];
 
@@ -82,7 +82,7 @@
 
     function burst(){confetti({particleCount:120,spread:70,origin:{y:0.3}});}
 
-    function spin(){if(!menus.length)return alert('메뉴가 없습니다!');popup.style.display='none';spinBtn.disabled=true;const sliceAngle=2*Math.PI/menus.length;const extra=Math.random()*sliceAngle;gsap.to({rot:rotation},{rot:rotation+5*2*Math.PI+extra,duration:5,ease:'power4.out',onUpdate(){rotation=this.targets()[0].rot;drawWheel();},onComplete(){rotation%=2*Math.PI;const idx=Math.floor(((3*Math.PI/2-rotation+2*Math.PI)%(2*Math.PI))/sliceAngle)%menus.length;const winner=menus[idx];popupTxt.innerHTML=`🎉 오늘의 점심은<br><span style="font-size:32px">${emojiMap[winner]||'🍽️'}</span> 🎊`;popup.style.display='flex';burst();spinBtn.disabled=false;}});}  
+    function spin(){if(!menus.length)return alert('메뉴가 없습니다!');popup.style.display='none';spinBtn.disabled=true;const sliceAngle=2*Math.PI/menus.length;const extra=Math.random()*sliceAngle;gsap.to({rot:rotation},{rot:rotation+5*2*Math.PI+extra,duration:5,ease:'power4.out',onUpdate(){rotation=this.targets()[0].rot;drawWheel();},onComplete(){rotation%=2*Math.PI;const idx=Math.floor(((3*Math.PI/2-rotation+2*Math.PI)%(2*Math.PI))/sliceAngle)%menus.length;const winner=menus[idx];popupTxt.innerHTML = `🎉 오늘의 메뉴는<br><span style="font-size:28px;font-weight:bold;">${winner}</span> 🎊`;popup.style.display='flex';burst();spinBtn.disabled=false;}});}  
 
     /****************  CRUD  ****************/
     function addMenu(){const v=input.value.trim();if(!v)return;menus.push(v);localStorage.setItem('menus',JSON.stringify(menus));input.value='';drawWheel();}
